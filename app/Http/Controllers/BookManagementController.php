@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class BookManagementController extends Controller
 {
@@ -35,7 +36,21 @@ class BookManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'isbn' => 'required|string',
+            'book_name' => 'required|string',
+            'author' => 'required|string',
+            'quantity' => 'required|integer',
+        ]);
+
+        Book::create([
+            'isbn' => $request->isbn,
+            'book_name' => $request->book_name,
+            'author' => $request->author,
+            'quantity' => $request->quantity,
+        ]);
+
+        return Redirect::route('book.index')->with('success', 'Book created successfully!');
     }
 
     /**
