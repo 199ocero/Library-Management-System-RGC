@@ -1,6 +1,11 @@
 @extends('welcome')
 @section('content')
-    <div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="d-flex flex-column align-items-center justify-content-center vh-100">
+        <div class="mb-5 text-center">
+            <h1 class="fw-bold fs-2">Welcome to Library Management System</h1>
+            <p>A library management system that allows for the efficient organization and management of books, borrowers,
+                and inventory. </p>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="card" style="width: 18rem;">
