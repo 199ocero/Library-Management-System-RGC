@@ -26,13 +26,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                </tr>
+                @foreach ($books as $book)
+                    <tr>
+                        <th scope="row">{{ $loop->index + 1 }}</th>
+                        <td>{{ $book->isbn }}</td>
+                        <td>{{ $book->book_name }}</td>
+                        <td>{{ $book->author }}</td>
+                        <td>{{ $book->quantity }}</td>
+                    </tr>
+                @endforeach
+
             </tbody>
         </table>
     </div>
@@ -53,6 +56,9 @@
                             <label for="isbn" class="form-label">International Standard Book Number (ISBN)</label>
                             <input type="text" class="form-control" id="isbn" name="isbn"
                                 placeholder="Enter ISBN">
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="book_name" class="form-label">Book Name</label>
