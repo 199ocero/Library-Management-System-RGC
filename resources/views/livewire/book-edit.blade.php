@@ -1,13 +1,15 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="bookModal" tabindex="-1">
+    <div wire:ignore.self class="modal fade" id="editBookModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create New Book Record</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit and Update Book Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" wire:click='resetFields'
+                        aria-label="Close"></button>
                 </div>
-                <form wire:submit.prevent="saveBook">
+                <form wire:submit.prevent="update">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="isbn" class="form-label">International Standard Book Number (ISBN)</label>
@@ -43,8 +45,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" wire:click='resetFields'
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update changes</button>
                     </div>
                 </form>
             </div>

@@ -13,7 +13,7 @@
                         <h5 class="card-title">Book Management</h5>
                         <p class="card-text">Easily organize and keep track of your book collection by managing details such
                             as ISBN, book title, quantity, and author.</p>
-                        <a href="{{ route('book.index') }}" class="btn btn-primary">Check Book Management</a>
+                        <a href="{{ route('book-management') }}" class="btn btn-primary">Check Book Management</a>
                     </div>
                 </div>
             </div>
