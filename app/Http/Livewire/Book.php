@@ -30,7 +30,7 @@ class Book extends Component
 
     // create a rule to validate the input fields
     protected $rules = [
-        'isbn' => 'required|string',
+        'isbn' => 'required|string|size:10|digits:10',
         'book_name' => 'required|string',
         'author' => 'required|string',
         'quantity' => 'required|integer',

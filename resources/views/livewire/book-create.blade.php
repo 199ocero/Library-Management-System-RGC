@@ -15,6 +15,8 @@
                             <label for="isbn" class="form-label">International Standard Book Number (ISBN)</label>
                             <input type="text" class="form-control" id="isbn" wire:model="isbn"
                                 placeholder="Enter ISBN">
+                            <div class="form-text">Note: Please enter exactly 10 digits/character for the ISBN number.
+                            </div>
                             @error('isbn')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
