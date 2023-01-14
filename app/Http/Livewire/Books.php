@@ -55,6 +55,7 @@ class Books extends Component
         // dispatch event to close the modal
         $this->dispatchBrowserEvent('close-modal');
 
+        // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Book created successfully!',
             'icon' => 'success',
