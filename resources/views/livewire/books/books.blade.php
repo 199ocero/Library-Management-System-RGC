@@ -1,6 +1,6 @@
 <div>
-    @include('livewire.books-create')
-    @include('livewire.books-edit')
+    @include('livewire.books.books-create')
+    @include('livewire.books.books-edit')
 
     <div class="d-flex flex-column  justify-content-center vh-100">
 

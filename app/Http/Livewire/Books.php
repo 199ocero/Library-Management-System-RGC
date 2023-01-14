@@ -139,6 +139,6 @@ class Books extends Component
             ->orWhere('author', 'like', '%' . $this->search . '%')
             ->orWhere('quantity', 'like', '%' . $this->search . '%')
             ->paginate(5);
-        return view('livewire.books', ['books' => $books]);
+        return view('livewire.books.books', ['books' => $books]);
     }
 }

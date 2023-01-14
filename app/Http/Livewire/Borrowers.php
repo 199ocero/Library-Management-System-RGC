@@ -8,6 +8,6 @@ class Borrowers extends Component
 {
     public function render()
     {
-        return view('livewire.borrowers');
+        return view('livewire.borrowers.borrowers');
     }
 }
