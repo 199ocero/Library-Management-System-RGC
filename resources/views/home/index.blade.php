@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Book Inventory</h5>
                         <p class="card-text">You can check the number of books that are currently borrowed.</p>
-                        <a href="{{ route('book-inventory') }}" class="btn btn-primary">Check Book Borrowers</a>
+                        <a href="{{ route('book-inventory') }}" class="btn btn-primary">Check Book Inventory</a>
                     </div>
                 </div>
             </div>
