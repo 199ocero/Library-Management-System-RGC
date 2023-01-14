@@ -14,15 +14,30 @@ class Inventories extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $books;
+    public $books, $book_id;
+
+    // listener for destroy an resetFieldsAndValidation
+    protected $listeners = ['destroy', 'resetFieldsAndValidation'];
 
     public function mount()
     {
         $this->books = Book::latest()->get();
     }
+    // function for reseting the fields
+    public function resetFieldsAndValidation()
+    {
+        // call this to reset modal fields
+        $this->reset(['book_id']);
+
+        // call this to reset validation error message
+        $this->resetValidation();
+    }
+
     public function render()
     {
         $borrowed_books = Inventory::latest()->paginate(5);
-        return view('livewire.inventories.inventories', ['borrowed_books' => $borrowed_books]);
+        return view('livewire.inventories.inventories', [
+            'borrowed_books' => $borrowed_books,
+        ]);
     }
 }

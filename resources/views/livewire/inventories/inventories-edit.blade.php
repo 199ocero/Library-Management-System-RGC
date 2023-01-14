@@ -1,5 +1,5 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="createBookBorrowedModal" tabindex="-1">
+    <div wire:ignore.self class="modal fade" id="editBookBorrowedModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form wire:submit.prevent="store">
+                <form wire:submit.prevent="update">
                     <div class="modal-body">
 
                         <div class="mb-3" wire:ignore>

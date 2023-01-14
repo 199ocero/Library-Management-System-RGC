@@ -7,23 +7,28 @@
 @section('script')
     <script>
         window.addEventListener('close-modal', event => {
-            $('#createBorrowerModal').modal('hide');
+            $('#createBookBorrowedModal').modal('hide');
             $('#editBorrowerModal').modal('hide');
         });
 
         // hide validation error message when modal close
 
-        // $(document).ready(function() {
-        //     $("#createBorrowerModal").on('hidden.bs.modal', function() {
-        //         window.livewire.emit('resetFieldsAndValidation');
-        //     });
-        //     $("#editBorrowerModal").on('hidden.bs.modal', function() {
-        //         window.livewire.emit('resetFieldsAndValidation');
-        //     });
-        // });
+        $(document).ready(function() {
+            $("#createBookBorrowedModal").on('hidden.bs.modal', function() {
+                window.livewire.emit('resetFieldsAndValidation');
+                $('.selectpicker').selectpicker('val', '');
+            });
+            $("#editBorrowerModal").on('hidden.bs.modal', function() {
+                window.livewire.emit('resetFieldsAndValidation');
+            });
+        });
         $(document).ready(function() {
             $('.selectpicker').selectpicker();
         });
+
+        function resetSelect() {
+            $('.selectpicker').selectpicker('val', '');
+        }
         // sweet alert
         window.addEventListener('swal', function(e) {
             Swal.fire({
