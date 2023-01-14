@@ -8,6 +8,6 @@ class BookBorrowerController extends Controller
 {
     public function __invoke()
     {
-        return view('books.index');
+        return view('borrower.index');
     }
 }

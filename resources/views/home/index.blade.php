@@ -23,7 +23,7 @@
                         <h5 class="card-title">Book Borrowers</h5>
                         <p class="card-text">Stay informed about who has borrowed your books and their contact information,
                             including full name, address, and phone number.</p>
-                        <a href="#" class="btn btn-primary">Check Book Borrowers</a>
+                        <a href="{{ route('book-borrower') }}" class="btn btn-primary">Check Book Borrowers</a>
                     </div>
                 </div>
             </div>

@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Livewire\Book;
-use App\Models\Books;
+use App\Http\Livewire\Books;
+use App\Models\Book;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Book extends Component
+class Books extends Component
 {
     use WithPagination;
 
@@ -42,7 +42,7 @@ class Book extends Component
         $this->validate();
 
         // save book if validation is success
-        Books::create([
+        Book::create([
             'isbn' => $this->isbn,
             'book_name' => $this->book_name,
             'author' => $this->author,
@@ -72,7 +72,7 @@ class Book extends Component
     }
 
     // function to edit and show the specific book
-    public function edit(Books $book)
+    public function edit(Book $book)
     {
         $this->book_id = $book->id;
         $this->isbn = $book->isbn;
@@ -86,7 +86,7 @@ class Book extends Component
     {
         $this->validate();
 
-        Books::where('id', $this->book_id)->update([
+        Book::where('id', $this->book_id)->update([
             'isbn' => $this->isbn,
             'book_name' => $this->book_name,
             'author' => $this->author,
@@ -121,7 +121,7 @@ class Book extends Component
 
     public function destroy($id)
     {
-        Books::where('id', $id)->delete();
+        Book::where('id', $id)->delete();
         // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Book deleted successfully!',
@@ -131,7 +131,7 @@ class Book extends Component
     }
     public function render()
     {
-        $books = Books::latest()
+        $books = Book::latest()
             ->where('isbn', 'like', '%' . $this->search . '%')
             ->orWhere('book_name', 'like', '%' . $this->search . '%')
             ->orWhere('author', 'like', '%' . $this->search . '%')

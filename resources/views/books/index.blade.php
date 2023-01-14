@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
     <div>
-        <livewire:book />
+        <livewire:books />
     </div>
 @endsection
 @section('script')
