@@ -63,16 +63,6 @@ class Books extends Component
         ]);
     }
 
-    // function for reseting the fields
-    public function resetFieldsAndValidation()
-    {
-        // call this to reset modal fields
-        $this->reset(['isbn', 'book_name', 'author', 'quantity']);
-
-        // call this to reset validation error message
-        $this->resetValidation();
-    }
-
     // function to edit and show the specific book
     public function edit(Book $book)
     {
@@ -131,6 +121,19 @@ class Books extends Component
             'iconColor' => 'green',
         ]);
     }
+
+
+    // function for reseting the fields
+    public function resetFieldsAndValidation()
+    {
+        // call this to reset modal fields
+        $this->reset(['isbn', 'book_name', 'author', 'quantity']);
+
+        // call this to reset validation error message
+        $this->resetValidation();
+    }
+
+
     public function render()
     {
         $books = Book::latest()
