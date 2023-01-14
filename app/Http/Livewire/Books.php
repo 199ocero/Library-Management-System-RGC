@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Livewire\Books;
 use App\Models\Book;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Books extends Component
 {
+
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
