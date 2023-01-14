@@ -98,6 +98,29 @@ class Borrowers extends Component
         ]);
     }
 
+    // function to confirm if user wants to delete the borrower
+    public function destroyConfirm($id)
+    {
+        // dispatch event to show sweet alert 2
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'title' => 'Are you sure?',
+            'text' => "You won't be able to revert this!",
+            'icon' => 'warning',
+            'id' => $id
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        Borrower::where('id', $id)->delete();
+        // dispatch event to show sweet alert 2
+        $this->dispatchBrowserEvent('swal', [
+            'title' => 'Borrower deleted successfully!',
+            'icon' => 'success',
+            'iconColor' => 'green',
+        ]);
+    }
+
     // function for reseting the fields
     public function resetFieldsAndValidation()
     {
