@@ -36,6 +36,13 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="mb-3">
+                            <label for="student_id" class="form-label">Select Date Borrowed</label>
+                            <input type="date" class="form-control" id="date_borrowed" wire:model="date_borrowed">
+                            @error('book_name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" onclick="resetSelect()"

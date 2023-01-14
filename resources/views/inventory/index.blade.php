@@ -27,7 +27,7 @@
         });
 
         function resetSelect() {
-            $('.selectpicker').selectpicker('val', '');
+            $('.selectpicker').selectpicker();
         }
         // sweet alert
         window.addEventListener('swal', function(e) {
