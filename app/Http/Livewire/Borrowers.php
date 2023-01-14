@@ -13,7 +13,7 @@ class Borrowers extends Component
     protected $paginationTheme = 'bootstrap';
 
     // declare variable from borrower livewire component
-    public $student_id, $full_name, $address, $contact_number;
+    public $borrower_id, $student_id, $full_name, $address, $contact_number;
 
     // declare variable for search filter
     public $search = '';
@@ -62,13 +62,40 @@ class Borrowers extends Component
         ]);
     }
 
-    // function to edit and show the specific book
+    // function to edit and show the specific borrower
     public function edit(Borrower $borrower)
     {
+        $this->borrower_id = $borrower->id;
         $this->student_id = $borrower->student_id;
         $this->full_name = $borrower->full_name;
         $this->address = $borrower->address;
         $this->contact_number = $borrower->contact_number;
+    }
+
+    //function to update the borrower
+    public function update()
+    {
+        $this->validate();
+
+        Borrower::where('id', $this->borrower_id)->update([
+            'student_id' => $this->student_id,
+            'full_name' => $this->full_name,
+            'address' => $this->address,
+            'contact_number' => $this->contact_number,
+        ]);
+
+        // call this to reset modal fields and validation
+        $this->resetFieldsAndValidation();
+
+        // dispatch event to close the modal
+        $this->dispatchBrowserEvent('close-modal');
+
+        // dispatch event to show sweet alert 2
+        $this->dispatchBrowserEvent('swal', [
+            'title' => 'Borrower updated successfully!',
+            'icon' => 'success',
+            'iconColor' => 'green',
+        ]);
     }
 
     // function for reseting the fields
