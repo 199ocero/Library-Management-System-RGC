@@ -11,17 +11,16 @@
         </div>
 
         <div class="mb-3">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between mb-4">
                 <div>
                     <input type="search" wire:model='search' class="form-control" placeholder="Search anything...">
                 </div>
                 <div>
 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#createBookModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createBookModal">
                         Create Book
                     </button>
-                    <a href="{{ route('home') }}" class="btn btn-danger ms-2">Back</a>
+                    <a href="{{ route('home') }}" class="btn btn-danger ml-3">Back</a>
                 </div>
             </div>
 
@@ -47,8 +46,8 @@
                             <td>{{ $book->author }}</td>
                             <td>{{ $book->quantity }}</td>
                             <td class="text-center">
-                                <button type="button" wire:click="edit({{ $book }})" data-bs-toggle="modal"
-                                    data-bs-target="#editBookModal" class="btn btn-sm btn-secondary">
+                                <button type="button" wire:click="edit({{ $book }})" data-toggle="modal"
+                                    data-target="#editBookModal" class="btn btn-sm btn-secondary">
                                     Edit
                                 </button>
                                 <button type="button" wire:click='destroyConfirm({{ $book->id }})'

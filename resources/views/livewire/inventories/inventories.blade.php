@@ -1,6 +1,6 @@
 <div>
-    {{-- @include('livewire.borrowers.borrowers-create')
-    @include('livewire.borrowers.borrowers-edit') --}}
+    @include('livewire.inventories.inventories-create')
+    {{-- @include('livewire.borrowers.borrowers-edit') --}}
 
     <div class="d-flex flex-column  justify-content-center vh-100">
 
@@ -10,17 +10,17 @@
         </div>
 
         <div class="mb-3">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between mb-4">
                 <div>
                     <input type="search" wire:model='search' class="form-control" placeholder="Search anything...">
                 </div>
                 <div>
 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#createBookBorrowedModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#createBookBorrowedModal">
                         Create Borrowed Book
                     </button>
-                    <a href="{{ route('home') }}" class="btn btn-danger ms-2">Back</a>
+                    <a href="{{ route('home') }}" class="btn btn-danger ml-3">Back</a>
                 </div>
             </div>
 

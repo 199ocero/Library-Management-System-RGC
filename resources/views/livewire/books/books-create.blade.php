@@ -1,12 +1,14 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="createBookModal" tabindex="-1">
+    <div wire:ignore.self class="modal fade" id="createBookModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create New Book Record</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" wire:click='resetFieldsAndValidation'
-                        aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        wire:click='resetFieldsAndValidation'>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <form wire:submit.prevent="store">
                     <div class="modal-body">
@@ -14,8 +16,8 @@
                             <label for="isbn" class="form-label">International Standard Book Number (ISBN)</label>
                             <input type="text" class="form-control" id="isbn" wire:model="isbn"
                                 placeholder="Enter ISBN" maxlength="10" minlength="10">
-                            <div class="form-text">Note: Please enter exactly 10 digits/character for the ISBN number.
-                            </div>
+                            <small class="form-text text-muted">Note: Please enter exactly 10 digits/character for the
+                                ISBN number.</small>
                             @error('isbn')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -47,7 +49,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" wire:click='resetFieldsAndValidation'
-                            data-bs-dismiss="modal">Close</button>
+                            data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
