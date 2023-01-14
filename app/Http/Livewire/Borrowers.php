@@ -24,9 +24,12 @@ class Borrowers extends Component
         $this->resetPage();
     }
 
+    // listener for destroy an resetFieldsAndValidation
+    protected $listeners = ['destroy', 'resetFieldsAndValidation'];
+
     // create a rule to validate the input fields
     protected $rules = [
-        'student_id' => 'required|string|size:10|digits:10',
+        'student_id' => 'required|string|size:10',
         'full_name' => 'required|string',
         'address' => 'required|string',
         'contact_number' => 'required|string|size:11|digits:11',

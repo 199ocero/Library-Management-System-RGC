@@ -37,21 +37,21 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="contact_numer" class="form-label">Contact Number</label>
-                            <input type="text" class="form-control" id="contact_numer" wire:model="contact_numer"
+                            <label for="contact_number" class="form-label">Contact Number</label>
+                            <input type="text" class="form-control" id="contact_number" wire:model="contact_number"
                                 placeholder="Enter Contact Number" maxlength="11" minlength="11">
-                            <div class="form-text">Note: Please enter exactly 11 digits/character for the Contact
-                                Number.
-                                @error('contact_numer')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            <div class="form-text">Note: Please enter exactly 11 digits for the Contact
+                                Number. </div>
+                            @error('contact_number')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" wire:click='resetFieldsAndValidation'
-                                data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" wire:click='resetFieldsAndValidation'
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </form>
             </div>
         </div>

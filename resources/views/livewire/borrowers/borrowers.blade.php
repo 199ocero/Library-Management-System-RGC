@@ -41,17 +41,17 @@
                 <tbody>
                     @forelse ($borrowers as $borrower)
                         <tr>
-                            <th scope="row">{{ $borrower->firstItem() + $loop->index }}</th>
+                            <th scope="row">{{ $borrowers->firstItem() + $loop->index }}</th>
                             <td>{{ $borrower->student_id }}</td>
                             <td>{{ $borrower->full_name }}</td>
                             <td>{{ $borrower->address }}</td>
                             <td>{{ $borrower->contact_number }}</td>
                             <td class="text-center">
-                                <button type="button" wire:click="edit({{ $book }})" data-bs-toggle="modal"
+                                <button type="button" wire:click="edit({{ $borrower }})" data-bs-toggle="modal"
                                     data-bs-target="#editBookModal" class="btn btn-sm btn-secondary">
                                     Edit
                                 </button>
-                                <button type="button" wire:click='destroyConfirm({{ $book->id }})'
+                                <button type="button" wire:click='destroyConfirm({{ $borrower->id }})'
                                     class="btn btn-sm btn-danger">
                                     Delete
                                 </button>
