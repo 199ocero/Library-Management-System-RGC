@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Book;
+use App\Models\Borrower;
 use Livewire\Component;
 use App\Models\Inventory;
 use Livewire\WithPagination;
@@ -14,7 +15,7 @@ class Inventories extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $books, $book_id;
+    public $books, $borrowers, $book_name;
 
     // listener for destroy an resetFieldsAndValidation
     protected $listeners = ['destroy', 'resetFieldsAndValidation'];
@@ -22,12 +23,14 @@ class Inventories extends Component
     public function mount()
     {
         $this->books = Book::latest()->get();
+        $this->borrowers = Borrower::latest()->get();
     }
+
     // function for reseting the fields
     public function resetFieldsAndValidation()
     {
         // call this to reset modal fields
-        $this->reset(['book_id']);
+        $this->reset(['book_name']);
 
         // call this to reset validation error message
         $this->resetValidation();

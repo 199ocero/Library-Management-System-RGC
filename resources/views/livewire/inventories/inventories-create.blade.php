@@ -12,18 +12,29 @@
                 </div>
                 <form wire:submit.prevent="store">
                     <div class="modal-body">
-
+                        <div class="mb-3" wire:ignore>
+                            <label for="student_id" class="form-label">Select Borrower Name</label>
+                            <select wire:model='borrower_name' class="form-control selectpicker" data-live-search="true"
+                                data-size="5" title="Select borrower...">
+                                @foreach ($borrowers as $borrower)
+                                    <option value="{{ $borrower->id }}">{{ $borrower->full_name }}</option>
+                                @endforeach
+                            </select>
+                            @error('book_name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="mb-3" wire:ignore>
                             <label for="student_id" class="form-label">Select Book Name</label>
-                            <select wire:model='book_id' class="form-control selectpicker" data-live-search="true"
+                            <select wire:model='book_name' class="form-control selectpicker" data-live-search="true"
                                 data-size="5" title="Select book...">
                                 @foreach ($books as $book)
                                     <option value="{{ $book->id }}">{{ $book->book_name }}</option>
                                 @endforeach
                             </select>
-                            {{-- @error('student_id')
+                            @error('book_name')
                                 <span class="text-danger">{{ $message }}</span>
-                            @enderror --}}
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -76,14 +76,14 @@ class Books extends Component
     //function to update the book
     public function update()
     {
-        $this->validate();
-
-        Book::where('id', $this->book_id)->update([
-            'isbn' => $this->isbn,
-            'book_name' => $this->book_name,
-            'author' => $this->author,
-            'quantity' => $this->quantity,
+        $validatedData = $this->validate([
+            'isbn' => 'required|string|size:10|digits:10',
+            'book_name' => 'required|string',
+            'author' => 'required|string',
+            'quantity' => 'required|integer',
         ]);
+
+        Book::where('id', $this->book_id)->update($validatedData);
 
         // call this to reset modal fields and validation
         $this->resetFieldsAndValidation();

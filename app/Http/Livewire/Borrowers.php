@@ -75,14 +75,14 @@ class Borrowers extends Component
     //function to update the borrower
     public function update()
     {
-        $this->validate();
-
-        Borrower::where('id', $this->borrower_id)->update([
-            'student_id' => $this->student_id,
-            'full_name' => $this->full_name,
-            'address' => $this->address,
-            'contact_number' => $this->contact_number,
+        $validatedData = $this->validate([
+            'student_id' => 'required|string|size:10',
+            'full_name' => 'required|string',
+            'address' => 'required|string',
+            'contact_number' => 'required|string|size:11|digits:11',
         ]);
+
+        Borrower::where('id', $this->borrower_id)->update($validatedData);
 
         // call this to reset modal fields and validation
         $this->resetFieldsAndValidation();
