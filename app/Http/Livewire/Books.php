@@ -25,7 +25,7 @@ class Books extends Component
         $this->resetPage();
     }
 
-    // listener for destroy
+    // listener for destroy an resetFieldsAndValidation
     protected $listeners = ['destroy', 'resetFieldsAndValidation'];
 
     // create a rule to validate the input fields
