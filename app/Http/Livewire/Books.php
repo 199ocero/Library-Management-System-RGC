@@ -49,8 +49,8 @@ class Books extends Component
             'quantity' => $this->quantity,
         ]);
 
-        // call this function to reset modal fields
-        $this->resetFields();
+        // call this to reset modal fields and validation
+        $this->resetFieldsAndValidation();
 
         // dispatch event to close the modal
         $this->dispatchBrowserEvent('close-modal');
@@ -63,12 +63,13 @@ class Books extends Component
     }
 
     // function for reseting the fields
-    public function resetFields()
+    public function resetFieldsAndValidation()
     {
-        $this->isbn = '';
-        $this->book_name = '';
-        $this->author = '';
-        $this->quantity = '';
+        // call this to reset modal fields
+        $this->reset(['isbn', 'book_name', 'author', 'quantity']);
+
+        // call this to reset validation error message
+        $this->resetValidation();
     }
 
     // function to edit and show the specific book
@@ -93,8 +94,8 @@ class Books extends Component
             'quantity' => $this->quantity,
         ]);
 
-        // call this function to reset modal fields
-        $this->resetFields();
+        // call this to reset modal fields and validation
+        $this->resetFieldsAndValidation();
 
         // dispatch event to close the modal
         $this->dispatchBrowserEvent('close-modal');

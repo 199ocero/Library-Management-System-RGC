@@ -11,6 +11,16 @@
             $('#editBookModal').modal('hide');
         });
 
+        // hide validation error message when modal close
+
+        $(document).ready(function() {
+            $("#createBookModal").on('hidden.bs.modal', function() {
+                window.livewire.emit('resetValidationErrors');
+            });
+            $("#editBookModal").on('hidden.bs.modal', function() {
+                window.livewire.emit('resetValidationErrors');
+            });
+        });
 
         // sweet alert
         window.addEventListener('swal', function(e) {

@@ -6,8 +6,8 @@
 
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit and Update Book Record</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" wire:click='resetFields'
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        wire:click='resetFieldsAndValidation' aria-label="Close"></button>
                 </div>
                 <form wire:submit.prevent="update">
                     <div class="modal-body">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" wire:click='resetFields'
+                        <button type="button" class="btn btn-secondary" wire:click='resetFieldsAndValidation'
                             data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Update changes</button>
                     </div>
