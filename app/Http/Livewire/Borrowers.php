@@ -29,7 +29,7 @@ class Borrowers extends Component
 
     // create a rule to validate the input fields
     protected $rules = [
-        'student_id' => 'required|string|size:10',
+        'student_id' => 'required|string|size:10|unique:borrowers',
         'full_name' => 'required|string',
         'address' => 'required|string',
         'contact_number' => 'required|string|size:11|digits:11',
