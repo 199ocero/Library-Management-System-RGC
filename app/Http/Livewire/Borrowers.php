@@ -62,6 +62,15 @@ class Borrowers extends Component
         ]);
     }
 
+    // function to edit and show the specific book
+    public function edit(Borrower $borrower)
+    {
+        $this->student_id = $borrower->student_id;
+        $this->full_name = $borrower->full_name;
+        $this->address = $borrower->address;
+        $this->contact_number = $borrower->contact_number;
+    }
+
     // function for reseting the fields
     public function resetFieldsAndValidation()
     {

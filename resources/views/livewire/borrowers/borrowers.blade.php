@@ -48,7 +48,7 @@
                             <td>{{ $borrower->contact_number }}</td>
                             <td class="text-center">
                                 <button type="button" wire:click="edit({{ $borrower }})" data-bs-toggle="modal"
-                                    data-bs-target="#editBookModal" class="btn btn-sm btn-secondary">
+                                    data-bs-target="#editBorrowerModal" class="btn btn-sm btn-secondary">
                                     Edit
                                 </button>
                                 <button type="button" wire:click='destroyConfirm({{ $borrower->id }})'
