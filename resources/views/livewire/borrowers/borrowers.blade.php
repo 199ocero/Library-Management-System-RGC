@@ -1,6 +1,6 @@
 <div>
-    {{-- @include('livewire.books.books-create')
-    @include('livewire.books.books-edit') --}}
+    @include('livewire.borrowers.borrowers-create')
+    @include('livewire.borrowers.borrowers-edit')
 
     <div class="d-flex flex-column  justify-content-center vh-100">
 
@@ -18,7 +18,7 @@
                 <div>
 
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#createBookModal">
+                        data-bs-target="#createBorrowerModal">
                         Create Borrower
                     </button>
                     <a href="{{ route('home') }}" class="btn btn-danger ms-2">Back</a>
