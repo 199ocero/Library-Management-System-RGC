@@ -26,7 +26,7 @@ class Books extends Component
     }
 
     // listener for destroy
-    protected $listeners = ['destroy'];
+    protected $listeners = ['destroy', 'resetFieldsAndValidation'];
 
     // create a rule to validate the input fields
     protected $rules = [

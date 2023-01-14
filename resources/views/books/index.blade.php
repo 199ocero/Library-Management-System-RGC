@@ -15,10 +15,10 @@
 
         $(document).ready(function() {
             $("#createBookModal").on('hidden.bs.modal', function() {
-                window.livewire.emit('resetValidationErrors');
+                window.livewire.emit('resetFieldsAndValidation');
             });
             $("#editBookModal").on('hidden.bs.modal', function() {
-                window.livewire.emit('resetValidationErrors');
+                window.livewire.emit('resetFieldsAndValidation');
             });
         });
 

@@ -1,13 +1,12 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="editBookModal" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1">
+    <div wire:ignore.self class="modal fade" id="editBookModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
 
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit and Update Book Record</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        wire:click='resetFieldsAndValidation' aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" wire:click='resetFieldsAndValidation'
+                        aria-label="Close"></button>
                 </div>
                 <form wire:submit.prevent="update">
                     <div class="modal-body">
