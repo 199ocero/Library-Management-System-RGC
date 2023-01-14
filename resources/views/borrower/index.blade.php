@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
     <div>
-        hello
+        <livewire:borrowers />
     </div>
 @endsection
