@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('app')
 @section('content')
     <div class="d-flex flex-column align-items-center justify-content-center vh-100">
         <div class="mb-5 text-center">

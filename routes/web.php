@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController')->name('home');
 Route::get('book', 'BookManagementController')->name('book-management');
+Route::get('borrower', 'BookBorrowerController')->name('book-borrower');
