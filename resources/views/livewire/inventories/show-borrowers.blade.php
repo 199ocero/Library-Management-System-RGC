@@ -44,7 +44,8 @@
                                     data-target="#editBookBorrowedModal" class="btn btn-sm btn-primary">
                                     Edit
                                 </button>
-                                <button type="button" class="btn btn-sm btn-danger">
+                                <button type="button" wire:click='destroyConfirm({{ $inventory->id }})'
+                                    class="btn btn-sm btn-danger">
                                     Delete
                                 </button>
                                 @if (empty($inventory->date_returned))

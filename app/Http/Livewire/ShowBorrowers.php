@@ -35,7 +35,7 @@ class ShowBorrowers extends Component
         $this->amount = $borrower->amount;
     }
 
-    //function to update the borrower
+    //function to update the inventory
     public function update()
     {
         $this->validate([
@@ -61,6 +61,29 @@ class ShowBorrowers extends Component
         // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Inventory updated successfully!',
+            'icon' => 'success',
+            'iconColor' => 'green',
+        ]);
+    }
+
+    // function to confirm if user wants to delete the borrower
+    public function destroyConfirm($id)
+    {
+        // dispatch event to show sweet alert 2
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'title' => 'Are you sure?',
+            'text' => "You won't be able to revert this!",
+            'icon' => 'warning',
+            'id' => $id
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        Inventory::where('id', $id)->delete();
+        // dispatch event to show sweet alert 2
+        $this->dispatchBrowserEvent('swal', [
+            'title' => 'Inventory deleted successfully!',
             'icon' => 'success',
             'iconColor' => 'green',
         ]);
