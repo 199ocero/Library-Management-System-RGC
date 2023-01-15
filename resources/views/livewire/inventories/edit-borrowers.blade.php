@@ -15,7 +15,7 @@
                         <div class="mb-3">
                             <div wire:ignore>
                                 <label for="borrower_name" class="form-label">Select Borrower Name</label>
-                                <select wire:model='borrower_name' class="form-control selectpicker"
+                                <select wire:model='borrower_name' class="form-control selectpickerBorrower"
                                     data-live-search="true" data-size="5" title="Select borrower...">
                                     @foreach ($borrowers as $borrower)
                                         <option value="{{ $borrower->id }}">{{ $borrower->full_name }}</option>
@@ -27,11 +27,11 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        {{-- <div class="mb-3">
+                        <div class="mb-3">
                             <div wire:ignore>
                                 <label for="book_name" class="form-label">Select Book Name</label>
-                                <select wire:model='book_name' class="form-control selectpicker" data-live-search="true"
-                                    data-size="5" title="Select book...">
+                                <select wire:model='book_name' class="form-control selectpickerBook"
+                                    data-live-search="true" data-size="5" title="Select book...">
                                     @foreach ($books as $book)
                                         <option value="{{ $book->id }}">{{ $book->book_name }}</option>
                                     @endforeach
@@ -40,7 +40,7 @@
                             @error('book_name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                        </div> --}}
+                        </div>
                         <div class="mb-3">
                             <label for="date_borrowed" class="form-label">Select Date Borrowed</label>
                             <input type="date" class="form-control" id="date_borrowed" wire:model="date_borrowed">

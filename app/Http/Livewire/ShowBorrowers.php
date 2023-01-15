@@ -49,7 +49,7 @@ class ShowBorrowers extends Component
     public function render()
     {
         $inventories = Inventory::with('borrowers:id,id,full_name')
-            ->with('books:id,book_name')
+            ->with('books:id,id,book_name')
             ->where('book_id', $this->book_id)
             ->latest()
             ->paginate(5);

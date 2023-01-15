@@ -18,12 +18,14 @@
             });
         });
 
-        function populateSelect($borrower_id) {
-            $('.selectpicker').selectpicker('val', $borrower_id);
+        function populateSelect($borrower_id, $book_id) {
+            $('.selectpickerBorrower').selectpicker('val', $borrower_id);
+            $('.selectpickerBook').selectpicker('val', $book_id);
         }
 
         function resetSelect() {
-            $('.selectpicker').selectpicker();
+            $('.selectpickerBorrower').selectpicker();
+            $('.selectpickerBook').selectpicker();
         }
         // sweet alert
         window.addEventListener('swal', function(e) {

@@ -38,7 +38,8 @@
                             <td>{{ $inventory->date_borrowed->format('F j, Y') }}</td>
                             <td>{{ $inventory->date_returned }}</td>
                             <td class="text-center">
-                                <button type="button" onclick="populateSelect({{ $inventory->borrowers[0]->id }})"
+                                <button type="button"
+                                    onclick="populateSelect({{ $inventory->borrowers[0]->id }},{{ $inventory->books[0]->id }})"
                                     wire:click="edit({{ $inventory }})" data-toggle="modal"
                                     data-target="#editBookBorrowedModal" class="btn btn-sm btn-primary">
                                     Edit
