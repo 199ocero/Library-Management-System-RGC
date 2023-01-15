@@ -16,7 +16,7 @@ class Inventories extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $books, $borrowers, $book_name, $borrower_name, $date_borrowed, $amount, $unreturn_amount;
+    public $stocks, $books, $borrowers, $book_name, $borrower_name, $date_borrowed, $amount, $unreturn_amount;
 
     // listener for destroy an resetFieldsAndValidation
     protected $listeners = ['destroy', 'resetFieldsAndValidation'];
@@ -72,11 +72,19 @@ class Inventories extends Component
         ]);
     }
 
+    public function getQuantity($id)
+    {
+        $amount = Book::find($id);
+        $borrowed = Inventory::where('book_id', $id)->sum('amount');
+
+        $this->stocks = $amount->quantity - $borrowed;
+    }
+
     // function for reseting the fields
     public function resetFieldsAndValidation()
     {
         // call this to reset modal fields
-        $this->reset(['book_name', 'borrower_name', 'date_borrowed', 'amount']);
+        $this->reset(['book_name', 'borrower_name', 'date_borrowed', 'amount', 'stocks']);
 
         // call this to reset validation error message
         $this->resetValidation();
