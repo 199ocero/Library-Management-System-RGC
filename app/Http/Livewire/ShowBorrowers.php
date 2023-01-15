@@ -60,7 +60,8 @@ class ShowBorrowers extends Component
                 'book_id' => $this->book_name,
                 'borrower_id' => $this->borrower_name,
                 'date_borrowed' => $this->date_borrowed,
-                'amount' => $this->amount
+                'amount' => $this->amount,
+                'unreturn_amount' => $this->amount,
             ]);
         }
 
@@ -116,8 +117,10 @@ class ShowBorrowers extends Component
 
     public function unReturn($id)
     {
+        $unreturn_amount = Inventory::find($id);
         Inventory::where('id', $id)->update([
             'date_returned' => null,
+            'amount' => $unreturn_amount->unreturn_amount
         ]);
         // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [

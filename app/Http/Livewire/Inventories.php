@@ -16,7 +16,7 @@ class Inventories extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $books, $borrowers, $book_name, $borrower_name, $date_borrowed, $amount;
+    public $books, $borrowers, $book_name, $borrower_name, $date_borrowed, $amount, $unreturn_amount;
 
     // listener for destroy an resetFieldsAndValidation
     protected $listeners = ['destroy', 'resetFieldsAndValidation'];
@@ -55,6 +55,7 @@ class Inventories extends Component
             'borrower_id' => $this->borrower_name,
             'date_borrowed' => $this->date_borrowed,
             'amount' => $this->amount,
+            'unreturn_amount' => $this->amount,
         ]);
 
         // call this to reset modal fields and validation

@@ -48,7 +48,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Yes, unreturn it!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.livewire.emit('unReturn', e.detail.id);
