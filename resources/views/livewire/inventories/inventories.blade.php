@@ -12,7 +12,7 @@
         <div class="mb-3">
             <div class="d-flex justify-content-between mb-4">
                 <div>
-                    <input type="search" wire:model='search' class="form-control" placeholder="Search anything...">
+                    <input type="search" wire:model='search' class="form-control" placeholder="Search book...">
                 </div>
                 <div>
 
