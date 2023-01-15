@@ -40,6 +40,21 @@
             });
         });
 
+        window.addEventListener('swal:confirm', function(e) {
+            Swal.fire({
+                title: e.detail.title,
+                text: e.detail.text,
+                icon: e.detail.icon,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.livewire.emit('destroy', e.detail.id);
+                }
+            })
+        });
         window.addEventListener('swal:unreturn', function(e) {
             Swal.fire({
                 title: e.detail.title,

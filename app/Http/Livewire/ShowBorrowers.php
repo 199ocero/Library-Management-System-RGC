@@ -17,7 +17,7 @@ class ShowBorrowers extends Component
     public $books, $borrowers, $book_id, $inventory_id, $borrower_name, $book_name, $date_borrowed, $date_returned, $amount;
 
     // listener for destroy an resetFieldsAndValidation
-    protected $listeners = ['unReturn', 'resetFieldsAndValidation'];
+    protected $listeners = ['destroy', 'unReturn', 'resetFieldsAndValidation'];
 
     public function mount()
     {
