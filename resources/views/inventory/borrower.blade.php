@@ -40,7 +40,7 @@
             });
         });
 
-        window.addEventListener('swal:confirm', function(e) {
+        window.addEventListener('swal:unreturn', function(e) {
             Swal.fire({
                 title: e.detail.title,
                 text: e.detail.text,
@@ -51,7 +51,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.livewire.emit('destroy', e.detail.id);
+                    window.livewire.emit('unReturn', e.detail.id);
                 }
             })
         });

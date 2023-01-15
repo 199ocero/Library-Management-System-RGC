@@ -17,7 +17,7 @@ class ShowBorrowers extends Component
     public $books, $borrowers, $book_id, $inventory_id, $borrower_name, $book_name, $date_borrowed, $date_returned, $amount;
 
     // listener for destroy an resetFieldsAndValidation
-    protected $listeners = ['destroy', 'resetFieldsAndValidation'];
+    protected $listeners = ['unReturn', 'resetFieldsAndValidation'];
 
     public function mount()
     {
@@ -32,6 +32,9 @@ class ShowBorrowers extends Component
         $this->borrower_name = $borrower->borrower_id;
         $this->book_name = $borrower->book_id;
         $this->date_borrowed = date('Y-m-d', strtotime($borrower->date_borrowed));
+        if ($borrower->date_returned != null) {
+            $this->date_returned = date('Y-m-d', strtotime($borrower->date_returned));
+        }
         $this->amount = $borrower->amount;
     }
 
@@ -44,13 +47,23 @@ class ShowBorrowers extends Component
             'date_borrowed' => 'required',
             'amount' => 'required|integer',
         ]);
+        if ($this->date_returned != null) {
+            Inventory::where('id', $this->inventory_id)->update([
+                'book_id' => $this->book_name,
+                'borrower_id' => $this->borrower_name,
+                'date_borrowed' => $this->date_borrowed,
+                'date_returned' => $this->date_returned,
+                'amount' => 0
+            ]);
+        } else {
+            Inventory::where('id', $this->inventory_id)->update([
+                'book_id' => $this->book_name,
+                'borrower_id' => $this->borrower_name,
+                'date_borrowed' => $this->date_borrowed,
+                'amount' => $this->amount
+            ]);
+        }
 
-        Inventory::where('id', $this->inventory_id)->update([
-            'book_id' => $this->book_name,
-            'borrower_id' => $this->borrower_name,
-            'date_borrowed' => $this->date_borrowed,
-            'amount' => $this->amount
-        ]);
 
         // call this to reset modal fields and validation
         $this->resetFieldsAndValidation();
@@ -66,7 +79,7 @@ class ShowBorrowers extends Component
         ]);
     }
 
-    // function to confirm if user wants to delete the borrower
+    // function to confirm if user wants to delete the inventory
     public function destroyConfirm($id)
     {
         // dispatch event to show sweet alert 2
@@ -84,6 +97,31 @@ class ShowBorrowers extends Component
         // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Inventory deleted successfully!',
+            'icon' => 'success',
+            'iconColor' => 'green',
+        ]);
+    }
+
+    // function to confirm if user wants to unreturn the inventory
+    public function unReturnConfirm($id)
+    {
+        // dispatch event to show sweet alert 2
+        $this->dispatchBrowserEvent('swal:unreturn', [
+            'title' => 'Are you sure?',
+            'text' => "You won't be able to revert this!",
+            'icon' => 'warning',
+            'id' => $id
+        ]);
+    }
+
+    public function unReturn($id)
+    {
+        Inventory::where('id', $id)->update([
+            'date_returned' => null,
+        ]);
+        // dispatch event to show sweet alert 2
+        $this->dispatchBrowserEvent('swal', [
+            'title' => 'Inventory unreturn successfully!',
             'icon' => 'success',
             'iconColor' => 'green',
         ]);

@@ -36,7 +36,7 @@
                             <td>{{ $inventory->borrowers[0]->full_name }}</td>
                             <td>{{ $inventory->amount }}</td>
                             <td>{{ $inventory->date_borrowed->format('F j, Y') }}</td>
-                            <td>{{ $inventory->date_returned }}</td>
+                            <td>{{ $inventory->date_returned ? $inventory->date_returned->format('F j, Y') : '' }}</td>
                             <td class="text-center">
                                 <button type="button"
                                     onclick="populateSelect({{ $inventory->borrowers[0]->id }},{{ $inventory->books[0]->id }})"
@@ -48,12 +48,9 @@
                                     class="btn btn-sm btn-danger">
                                     Delete
                                 </button>
-                                @if (empty($inventory->date_returned))
-                                    <button type="button" class="btn btn-sm btn-secondary">
-                                        Return Book
-                                    </button>
-                                @else
-                                    <button type="button" class="btn btn-sm btn-warning">
+                                @if (!empty($inventory->date_returned))
+                                    <button type="button" wire:click='unReturnConfirm({{ $inventory->id }})'
+                                        class="btn btn-sm btn-warning">
                                         Unreturn Book
                                     </button>
                                 @endif

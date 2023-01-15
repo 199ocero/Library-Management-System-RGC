@@ -50,6 +50,16 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="date_returned" class="form-label">Select Date Returned</label>
+                            <input type="date" class="form-control" id="date_returned" wire:model="date_returned">
+                            <small class="form-text text-muted">Optional: Select only when student return the
+                                book.</small>
+                            @error('date_returned')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
                             <label for="amount" class="form-label">Books to be Borrowed</label>
                             <input type="number" class="form-control" id="amount" wire:model="amount"
                                 placeholder="Enter amount">
