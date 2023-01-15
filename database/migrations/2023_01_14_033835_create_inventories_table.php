@@ -15,8 +15,8 @@ class CreateInventoriesTable extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_id')->constrained();
-            $table->foreignId('borrower_id')->constrained();
+            $table->foreignId('book_id')->constrained()->onDelete('cascade');;
+            $table->foreignId('borrower_id')->constrained()->onDelete('cascade');;
             $table->integer('amount');
             $table->integer('unreturn_amount');
             $table->string('date_borrowed');
