@@ -20,7 +20,7 @@ class CreateInventoriesTable extends Migration
             $table->integer('amount');
             $table->integer('unreturn_amount');
             $table->string('date_borrowed');
-            $table->string('date_returned');
+            $table->string('date_returned')->nullable();
             $table->timestamps();
         });
     }
