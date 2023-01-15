@@ -36,9 +36,19 @@
                             <td>{{ $borrower->date_borrowed->format('F j, Y') }}</td>
                             <td>{{ $borrower->date_returned }}</td>
                             <td class="text-center">
+                                <button type="button" class="btn btn-sm btn-primary">
+                                    Edit
+                                </button>
+                                <button type="button" class="btn btn-sm btn-danger">
+                                    Delete
+                                </button>
                                 @if (empty($borrower->date_returned))
-                                    <button type="button" class="btn btn-sm btn-primary">
+                                    <button type="button" class="btn btn-sm btn-secondary">
                                         Return Book
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-sm btn-warning">
+                                        Unreturn Book
                                     </button>
                                 @endif
 
