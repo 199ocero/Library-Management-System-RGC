@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
     <div>
-        hello {{ $book_id }}
+        <livewire:show-borrowers :book_id="$book_id">
     </div>
 @endsection
