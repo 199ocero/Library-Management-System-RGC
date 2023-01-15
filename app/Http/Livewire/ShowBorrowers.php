@@ -14,7 +14,7 @@ class ShowBorrowers extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $books, $borrowers, $book_id, $borrower_id, $borrower_name, $book_name, $date_borrowed, $date_returned, $amount;
+    public $books, $borrowers, $book_id, $inventory_id, $borrower_name, $book_name, $date_borrowed, $date_returned, $amount;
 
     // listener for destroy an resetFieldsAndValidation
     protected $listeners = ['destroy', 'resetFieldsAndValidation'];
@@ -28,12 +28,42 @@ class ShowBorrowers extends Component
     // function to edit and show the specific borrower
     public function edit(Inventory $borrower)
     {
-        $this->borrower_id = $borrower->id;
+        $this->inventory_id = $borrower->id;
         $this->borrower_name = $borrower->borrower_id;
         $this->book_name = $borrower->book_id;
         $this->date_borrowed = date('Y-m-d', strtotime($borrower->date_borrowed));
-        $this->date_returned = date('Y-m-d', strtotime($borrower->date_returned));
         $this->amount = $borrower->amount;
+    }
+
+    //function to update the borrower
+    public function update()
+    {
+        $this->validate([
+            'book_name' => 'required',
+            'borrower_name' => 'required',
+            'date_borrowed' => 'required',
+            'amount' => 'required|integer',
+        ]);
+
+        Inventory::where('id', $this->inventory_id)->update([
+            'book_id' => $this->book_name,
+            'borrower_id' => $this->borrower_name,
+            'date_borrowed' => $this->date_borrowed,
+            'amount' => $this->amount
+        ]);
+
+        // call this to reset modal fields and validation
+        $this->resetFieldsAndValidation();
+
+        // dispatch event to close the modal
+        $this->dispatchBrowserEvent('close-modal');
+
+        // dispatch event to show sweet alert 2
+        $this->dispatchBrowserEvent('swal', [
+            'title' => 'Inventory updated successfully!',
+            'icon' => 'success',
+            'iconColor' => 'green',
+        ]);
     }
 
     // function for reseting the fields

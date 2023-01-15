@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form wire:submit.prevent="store">
+                <form wire:submit.prevent="update">
                     <div class="modal-body">
                         <div class="mb-3">
                             <div wire:ignore>
@@ -61,7 +61,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" onclick="resetSelect()"
                             wire:click='resetFieldsAndValidation' data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Update changes</button>
                     </div>
                 </form>
             </div>
