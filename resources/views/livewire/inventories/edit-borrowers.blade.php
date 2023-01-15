@@ -48,6 +48,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="amount" class="form-label">Books to be Borrowed</label>
                             <input type="number" class="form-control" id="amount" wire:model="amount"

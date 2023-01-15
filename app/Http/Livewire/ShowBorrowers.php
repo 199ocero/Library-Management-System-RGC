@@ -31,8 +31,8 @@ class ShowBorrowers extends Component
         $this->borrower_id = $borrower->id;
         $this->borrower_name = $borrower->borrower_id;
         $this->book_name = $borrower->book_id;
-        $this->date_borrowed = $borrower->date_borrowed;
-        $this->date_returned = $borrower->date_returned;
+        $this->date_borrowed = date('Y-m-d', strtotime($borrower->date_borrowed));
+        $this->date_returned = date('Y-m-d', strtotime($borrower->date_returned));
         $this->amount = $borrower->amount;
     }
 
