@@ -27,6 +27,15 @@ class Inventories extends Component
         $this->borrowers = Borrower::latest()->get();
     }
 
+    // declare variable for search filter
+    public $search = '';
+
+    // to reset the page to page 1
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
     // create a rule to validate the input fields
     protected $rules = [
         'book_name' => 'required',
@@ -74,9 +83,13 @@ class Inventories extends Component
 
     public function render()
     {
+        $search = $this->search;
         $borrowed_books = Inventory::select('book_id', DB::raw('SUM(amount) as total_amount'))
             ->with('books:id,book_name,quantity')
             ->groupBy('book_id')
+            ->whereHas('books', function ($query) use ($search) {
+                $query->where('book_name', 'like', '%' . $search . '%');
+            })
             ->latest()
             ->paginate(5);
         return view('livewire.inventories.inventories', [

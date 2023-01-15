@@ -23,7 +23,6 @@
                     <a href="{{ route('home') }}" class="btn btn-danger ml-3">Back</a>
                 </div>
             </div>
-            {{ $borrowed_books }}
             <table class="table">
                 <thead>
                     <tr>
@@ -42,7 +41,7 @@
                             <td>{{ $borrowed_book->books[0]->quantity }}</td>
                             <td>{{ $borrowed_book->books[0]->quantity - $borrowed_book->total_amount }}</td>
                             <td class="text-center">
-                                <button type="button" wire:click="checkBorrower({{ $borrowed_book->id }})"
+                                <button type="button" wire:click="checkBorrower({{ $borrowed_book->book_id }})"
                                     class="btn btn-sm btn-secondary">
                                     Check Borrowers
                                 </button>
