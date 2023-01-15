@@ -10,7 +10,7 @@ class Inventory extends Model
     protected $dates = ['date_borrowed', 'date_returned'];
 
     protected $fillable = [
-        'book_id', 'borrower_id', 'amount', 'date_borrowed', 'date_returned'
+        'book_id', 'borrower_id', 'amount', 'unreturn_amount', 'date_borrowed', 'date_returned'
     ];
 
     public function books()

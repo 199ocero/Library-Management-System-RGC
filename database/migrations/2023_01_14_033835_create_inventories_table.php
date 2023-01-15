@@ -18,6 +18,7 @@ class CreateInventoriesTable extends Migration
             $table->foreignId('book_id')->constrained();
             $table->foreignId('borrower_id')->constrained();
             $table->integer('amount');
+            $table->integer('unreturn_amount');
             $table->string('date_borrowed');
             $table->string('date_returned');
             $table->timestamps();
