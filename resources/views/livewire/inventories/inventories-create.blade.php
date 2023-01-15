@@ -50,10 +50,18 @@
                         </div>
                         <div class="mb-3">
                             <label for="amount" class="form-label">Books to be Borrowed
-                                <span
-                                    class="font-weight-bold text-danger">{{ $stocks ? "($stocks Available)" : '' }}</span></label>
+                                @if (empty($stocks))
+                                    <span class="font-weight-bold text-danger">(0 Available)</span>
+                                @else
+                                    <span class="font-weight-bold text-success">{{ "($stocks Available)" }}</span>
+                                @endif
+
+                            </label>
                             <input type="number" class="form-control" id="date_borrowed" wire:model="amount"
                                 placeholder="Enter amount">
+                            @error('stocks')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                             @error('amount')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

@@ -49,27 +49,31 @@ class Inventories extends Component
     {
         $this->validate();
 
-        // save inventory if validation is success
-        Inventory::create([
-            'book_id' => $this->book_name,
-            'borrower_id' => $this->borrower_name,
-            'date_borrowed' => $this->date_borrowed,
-            'amount' => $this->amount,
-            'unreturn_amount' => $this->amount,
-        ]);
+        if ($this->stocks <= 0) {
+            $this->addError('stocks', 'Book out of stock');
+        } else {
+            // save inventory if validation is success
+            Inventory::create([
+                'book_id' => $this->book_name,
+                'borrower_id' => $this->borrower_name,
+                'date_borrowed' => $this->date_borrowed,
+                'amount' => $this->amount,
+                'unreturn_amount' => $this->amount,
+            ]);
 
-        // call this to reset modal fields and validation
-        $this->resetFieldsAndValidation();
+            // call this to reset modal fields and validation
+            $this->resetFieldsAndValidation();
 
-        // dispatch event to close the modal
-        $this->dispatchBrowserEvent('close-modal');
+            // dispatch event to close the modal
+            $this->dispatchBrowserEvent('close-modal');
 
-        // dispatch event to show sweet alert 2
-        $this->dispatchBrowserEvent('swal', [
-            'title' => 'Inventory created successfully!',
-            'icon' => 'success',
-            'iconColor' => 'green',
-        ]);
+            // dispatch event to show sweet alert 2
+            $this->dispatchBrowserEvent('swal', [
+                'title' => 'Inventory created successfully!',
+                'icon' => 'success',
+                'iconColor' => 'green',
+            ]);
+        }
     }
 
     public function getQuantity($id)
