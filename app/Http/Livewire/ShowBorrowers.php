@@ -16,7 +16,11 @@ class ShowBorrowers extends Component
 
     public function render()
     {
-        $borrowers = Inventory::where('book_id', $this->book_id)->paginate(5);
+        $borrowers = Inventory::with('borrowers:id,full_name')
+            ->with('books:id,book_name')
+            ->where('book_id', $this->book_id)
+            ->latest()
+            ->paginate(5);
 
         return view('livewire.inventories.show-borrowers', [
             'borrowers' => $borrowers

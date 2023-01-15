@@ -22,6 +22,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Book Name</th>
                         <th scope="col">Book Borrower</th>
+                        <th scope="col">Amount</th>
                         <th scope="col">Date Borrowed</th>
                         <th scope="col">Date Returned</th>
                         <th scope="col" class="text-center">Actions</th>
@@ -31,8 +32,9 @@
                     @forelse ($borrowers as $borrower)
                         <tr>
                             <th scope="row">{{ $borrowers->firstItem() + $loop->index }}</th>
-                            <td>{{ $borrower->book_id }}</td>
-                            <td>{{ $borrower->borrower_id }}</td>
+                            <td>{{ $borrower->books[0]->book_name }}</td>
+                            <td>{{ $borrower->borrowers[0]->full_name }}</td>
+                            <td>{{ $borrower->amount }}</td>
                             <td>{{ $borrower->date_borrowed->format('F j, Y') }}</td>
                             <td>{{ $borrower->date_returned }}</td>
                             <td class="text-center">
