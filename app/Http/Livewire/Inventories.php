@@ -49,8 +49,8 @@ class Inventories extends Component
     {
         $this->validate();
 
-        if ($this->stocks <= 0) {
-            $this->addError('stocks', 'Book out of stock');
+        if ($this->stocks <= 0 || $this->stocks < $this->amount) {
+            $this->addError('stocks', 'Book out of stock or you entered more than the available stock');
         } else {
             // save inventory if validation is success
             Inventory::create([
