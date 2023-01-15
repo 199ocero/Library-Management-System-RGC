@@ -49,7 +49,7 @@ class Inventories extends Component
     {
         $this->validate();
 
-        // save borrower if validation is success
+        // save inventory if validation is success
         Inventory::create([
             'book_id' => $this->book_name,
             'borrower_id' => $this->borrower_name,
