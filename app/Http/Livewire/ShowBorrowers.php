@@ -25,6 +25,15 @@ class ShowBorrowers extends Component
         $this->borrowers = Borrower::latest()->get();
     }
 
+    // declare variable for search filter
+    public $search = '';
+
+    // to reset the page to page 1
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
     // function to edit and show the specific borrower
     public function edit(Inventory $borrower)
     {
@@ -142,9 +151,14 @@ class ShowBorrowers extends Component
 
     public function render()
     {
+        $search = $this->search;
+
         $inventories = Inventory::with('borrowers:id,id,full_name')
             ->with('books:id,id,book_name')
             ->where('book_id', $this->book_id)
+            ->whereHas('borrowers', function ($query) use ($search) {
+                $query->where('full_name', 'like', '%' . $search . '%');
+            })
             ->latest()
             ->paginate(5);
 
