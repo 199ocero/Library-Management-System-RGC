@@ -3,13 +3,23 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Inventory;
+use Livewire\WithPagination;
 
 class ShowBorrowers extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
     public $book_id;
 
     public function render()
     {
-        return view('livewire.inventories.show-borrowers', ['book_id' => $this->book_id]);
+        $borrowers = Inventory::where('book_id', $this->book_id)->paginate(5);
+
+        return view('livewire.inventories.show-borrowers', [
+            'borrowers' => $borrowers
+        ]);
     }
 }
