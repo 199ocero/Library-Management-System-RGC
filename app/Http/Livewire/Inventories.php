@@ -44,7 +44,7 @@ class Inventories extends Component
         'amount' => 'required|integer',
     ];
 
-    // function to store borrower
+    // function to store inventory
     public function store()
     {
         $this->validate();
