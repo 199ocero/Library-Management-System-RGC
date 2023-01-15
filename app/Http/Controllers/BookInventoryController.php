@@ -11,8 +11,10 @@ class BookInventoryController extends Controller
         return view('inventory.index');
     }
 
-    public function showBorrower()
+    public function showBorrower($book_id)
     {
-        return view('inventory.borrower');
+        return view('inventory.borrower', [
+            'book_id' => $book_id
+        ]);
     }
 }

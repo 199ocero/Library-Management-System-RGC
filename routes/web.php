@@ -18,4 +18,4 @@ Route::get('/', 'HomeController')->name('home');
 Route::get('book', 'BookManagementController')->name('book-management');
 Route::get('borrower', 'BookBorrowerController')->name('book-borrower');
 Route::get('inventory', [BookInventoryController::class, 'index'])->name('book-inventory');
-Route::get('inventory/borrowers', [BookInventoryController::class, 'showBorrower'])->name('book-inventory.borrower');
+Route::get('inventory/borrowers/{book_id}', [BookInventoryController::class, 'showBorrower'])->name('book-inventory.borrower');

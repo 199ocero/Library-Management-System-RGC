@@ -40,10 +40,10 @@
                             <td>{{ $borrowed_book->books[0]->quantity }}</td>
                             <td>{{ $borrowed_book->books[0]->quantity - $borrowed_book->total_amount }}</td>
                             <td class="text-center">
-                                <button type="button" wire:click="checkBorrower({{ $borrowed_book->book_id }})"
+                                <a href="{{ route('book-inventory.borrower', $borrowed_book->book_id) }}" type="button"
                                     class="btn btn-sm btn-secondary">
                                     Check Borrowers
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     @empty
