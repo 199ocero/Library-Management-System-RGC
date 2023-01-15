@@ -17,4 +17,9 @@ class Inventory extends Model
     {
         return $this->hasMany(Book::class, 'id', 'book_id');
     }
+
+    public function borrowers()
+    {
+        return $this->hasMany(Borrower::class, 'id', 'borrower_id');
+    }
 }
