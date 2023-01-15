@@ -23,9 +23,7 @@
                     <a href="{{ route('home') }}" class="btn btn-danger ml-3">Back</a>
                 </div>
             </div>
-
-
-
+            {{ $borrowed_books }}
             <table class="table">
                 <thead>
                     <tr>
@@ -33,7 +31,6 @@
                         <th scope="col">Book Name</th>
                         <th scope="col">Book Quantity</th>
                         <th scope="col">Book In Stocks</th>
-                        <th scope="col">Borrowers</th>
                         <th scope="col" class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -41,18 +38,13 @@
                     @forelse ($borrowed_books as $borrowed_book)
                         <tr>
                             <th scope="row">{{ $borrowed_books->firstItem() + $loop->index }}</th>
-                            <td>{{ $borrowed_book->book_id }}</td>
-                            <td>{{ $borrowed_book->borrower_id }}</td>
-                            <td>123</td>
-                            <td>123</td>
+                            <td>{{ $borrowed_book->books[0]->book_name }}</td>
+                            <td>{{ $borrowed_book->books[0]->quantity }}</td>
+                            <td>{{ $borrowed_book->books[0]->quantity - $borrowed_book->total_amount }}</td>
                             <td class="text-center">
-                                <button type="button" wire:click="edit({{ $borrowed_book }})" data-bs-toggle="modal"
-                                    data-bs-target="#editBorrowerModal" class="btn btn-sm btn-secondary">
-                                    Edit
-                                </button>
-                                <button type="button" wire:click='destroyConfirm({{ $borrowed_book->id }})'
-                                    class="btn btn-sm btn-danger">
-                                    Return
+                                <button type="button" wire:click="checkBorrower({{ $borrowed_book->id }})"
+                                    class="btn btn-sm btn-secondary">
+                                    Check Borrowers
                                 </button>
                             </td>
                         </tr>

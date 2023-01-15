@@ -3,10 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Models\Book;
-use App\Models\Borrower;
 use Livewire\Component;
+use App\Models\Borrower;
 use App\Models\Inventory;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class Inventories extends Component
 {
@@ -73,7 +74,11 @@ class Inventories extends Component
 
     public function render()
     {
-        $borrowed_books = Inventory::latest()->paginate(5);
+        $borrowed_books = Inventory::select('book_id', DB::raw('SUM(amount) as total_amount'))
+            ->with('books:id,book_name,quantity')
+            ->groupBy('book_id')
+            ->latest()
+            ->paginate(5);
         return view('livewire.inventories.inventories', [
             'borrowed_books' => $borrowed_books,
         ]);
