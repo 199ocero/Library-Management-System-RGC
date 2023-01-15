@@ -1,5 +1,5 @@
 <div>
-
+    @include('livewire.inventories.edit-borrowers')
     <div class="d-flex flex-column  justify-content-center vh-100">
 
         <div class="mb-5 text-center">
@@ -29,22 +29,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($borrowers as $borrower)
+                    @forelse ($inventories as $inventory)
                         <tr>
-                            <th scope="row">{{ $borrowers->firstItem() + $loop->index }}</th>
-                            <td>{{ $borrower->books[0]->book_name }}</td>
-                            <td>{{ $borrower->borrowers[0]->full_name }}</td>
-                            <td>{{ $borrower->amount }}</td>
-                            <td>{{ $borrower->date_borrowed->format('F j, Y') }}</td>
-                            <td>{{ $borrower->date_returned }}</td>
+                            <th scope="row">{{ $inventories->firstItem() + $loop->index }}</th>
+                            <td>{{ $inventory->books[0]->book_name }}</td>
+                            <td>{{ $inventory->borrowers[0]->full_name }}</td>
+                            <td>{{ $inventory->amount }}</td>
+                            <td>{{ $inventory->date_borrowed->format('F j, Y') }}</td>
+                            <td>{{ $inventory->date_returned }}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-primary">
+                                <button type="button" onclick="populateSelect({{ $inventory->borrowers[0]->id }})"
+                                    wire:click="edit({{ $inventory }})" data-toggle="modal"
+                                    data-target="#editBookBorrowedModal" class="btn btn-sm btn-primary">
                                     Edit
                                 </button>
                                 <button type="button" class="btn btn-sm btn-danger">
                                     Delete
                                 </button>
-                                @if (empty($borrower->date_returned))
+                                @if (empty($inventory->date_returned))
                                     <button type="button" class="btn btn-sm btn-secondary">
                                         Return Book
                                     </button>
@@ -66,7 +68,7 @@
 
                 </tbody>
             </table>
-            {{ $borrowers->links() }}
+            {{ $inventories->links() }}
         </div>
 
     </div>
