@@ -8,7 +8,6 @@
     <script>
         window.addEventListener('close-modal', event => {
             $('#createBookBorrowedModal').modal('hide');
-            $('#editBorrowerModal').modal('hide');
         });
 
         // hide validation error message when modal close
@@ -17,9 +16,6 @@
             $("#createBookBorrowedModal").on('hidden.bs.modal', function() {
                 window.livewire.emit('resetFieldsAndValidation');
                 $('.selectpicker').selectpicker('val', '');
-            });
-            $("#editBorrowerModal").on('hidden.bs.modal', function() {
-                window.livewire.emit('resetFieldsAndValidation');
             });
         });
         $(document).ready(function() {
@@ -40,22 +36,6 @@
                 toast: true,
                 showConfirmButton: false,
             });
-        });
-
-        window.addEventListener('swal:confirm', function(e) {
-            Swal.fire({
-                title: e.detail.title,
-                text: e.detail.text,
-                icon: e.detail.icon,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.livewire.emit('destroy', e.detail.id);
-                }
-            })
         });
     </script>
 @endsection
