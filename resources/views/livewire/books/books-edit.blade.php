@@ -40,7 +40,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="quantity" class="form-label">Quantity</label>
-                            <input type="number" class="form-control" id="quantity" wire:model="quantity"
+                            <input type="text" class="form-control" id="quantity" wire:model="quantity"
                                 placeholder="Enter Quantity">
                             @error('quantity')
                                 <span class="text-danger">{{ $message }}</span>

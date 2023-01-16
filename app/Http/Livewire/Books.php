@@ -9,11 +9,13 @@ use Livewire\WithPagination;
 class Books extends Component
 {
 
+    // use WithPagination to use paginate() in render() function
     use WithPagination;
 
+    // use bootstrap as pagination theme
     protected $paginationTheme = 'bootstrap';
 
-    // declare variable from books livewire component
+    // declare variable
     public $book_id, $isbn, $book_name, $author, $quantity;
 
     // declare variable for search filter
@@ -25,20 +27,21 @@ class Books extends Component
         $this->resetPage();
     }
 
-    // listener for destroy an resetFieldsAndValidation
+    // listener events in livewire components
     protected $listeners = ['destroy', 'resetFieldsAndValidation'];
 
-    // create a rule to validate the input fields
+    // create a rule to validate the fields
     protected $rules = [
         'isbn' => 'required|string|size:10|digits:10|unique:books',
         'book_name' => 'required|string',
         'author' => 'required|string',
-        'quantity' => 'required|integer',
+        'quantity' => 'required|integer|min:1',
     ];
 
     // function to store books
     public function store()
     {
+        // validate data
         $this->validate();
 
         // save book if validation is success
@@ -76,6 +79,8 @@ class Books extends Component
     //function to update the book
     public function update()
     {
+
+        // validate data
         $validatedData = $this->validate([
             'isbn' => 'required|string|size:10|digits:10',
             'book_name' => 'required|string',
@@ -83,6 +88,7 @@ class Books extends Component
             'quantity' => 'required|integer',
         ]);
 
+        // find book record where id = book_id and update
         Book::where('id', $this->book_id)->update($validatedData);
 
         // call this to reset modal fields and validation
@@ -107,12 +113,14 @@ class Books extends Component
             'title' => 'Are you sure?',
             'text' => "You won't be able to revert this!",
             'icon' => 'warning',
+            // pass the id so we can use this in destroy method
             'id' => $id
         ]);
     }
 
     public function destroy($id)
     {
+        // find book record where id = id and delete
         Book::where('id', $id)->delete();
         // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [
