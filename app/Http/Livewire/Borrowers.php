@@ -8,11 +8,13 @@ use Livewire\WithPagination;
 
 class Borrowers extends Component
 {
+    // use WithPagination to use paginate() in render() function
     use WithPagination;
 
+    // use bootstrap as pagination theme
     protected $paginationTheme = 'bootstrap';
 
-    // declare variable from borrower livewire component
+    // declare variable
     public $borrower_id, $student_id, $full_name, $address, $contact_number;
 
     // declare variable for search filter
@@ -24,10 +26,10 @@ class Borrowers extends Component
         $this->resetPage();
     }
 
-    // listener for destroy an resetFieldsAndValidation
+    // listener events in livewire components
     protected $listeners = ['destroy', 'resetFieldsAndValidation'];
 
-    // create a rule to validate the input fields
+    // create a rule to validate the fields
     protected $rules = [
         'student_id' => 'required|string|size:10|unique:borrowers',
         'full_name' => 'required|string',
@@ -38,6 +40,7 @@ class Borrowers extends Component
     // function to store borrower
     public function store()
     {
+        // validate data
         $this->validate();
 
         // save borrower if validation is success
@@ -75,6 +78,7 @@ class Borrowers extends Component
     //function to update the borrower
     public function update()
     {
+        //validate data
         $validatedData = $this->validate([
             'student_id' => 'required|string|size:10',
             'full_name' => 'required|string',
@@ -82,6 +86,7 @@ class Borrowers extends Component
             'contact_number' => 'required|string|size:11|digits:11',
         ]);
 
+        // find borrower record where id = book_id and update
         Borrower::where('id', $this->borrower_id)->update($validatedData);
 
         // call this to reset modal fields and validation
@@ -106,12 +111,14 @@ class Borrowers extends Component
             'title' => 'Are you sure?',
             'text' => "You won't be able to revert this!",
             'icon' => 'warning',
+            // pass the id so we can use this in destroy method
             'id' => $id
         ]);
     }
 
     public function destroy($id)
     {
+        // find borrower record where id = id and delete
         Borrower::where('id', $id)->delete();
         // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [
