@@ -14,7 +14,7 @@ class ShowBorrowers extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $books, $borrowers, $book_id, $inventory_id, $borrower_name, $book_name, $date_borrowed, $date_returned, $amount;
+    public $stocks, $books, $borrowers, $book_id, $inventory_id, $borrower_name, $book_name, $date_borrowed, $date_returned, $amount;
 
     // listener for destroy an resetFieldsAndValidation
     protected $listeners = ['destroy', 'unReturn', 'resetFieldsAndValidation'];
@@ -37,6 +37,7 @@ class ShowBorrowers extends Component
     // function to edit and show the specific borrower
     public function edit(Inventory $borrower)
     {
+        $this->getQuantity($borrower->book_id);
         $this->inventory_id = $borrower->id;
         $this->borrower_name = $borrower->borrower_id;
         $this->book_name = $borrower->book_id;
@@ -54,8 +55,37 @@ class ShowBorrowers extends Component
             'book_name' => 'required',
             'borrower_name' => 'required',
             'date_borrowed' => 'required',
-            'amount' => 'required|integer',
+            'amount' => 'required|integer|numeric|min:1',
         ]);
+        if ($this->stocks <= 0) {
+            $amount = Inventory::where('id', $this->inventory_id)->first();
+            if ($amount->amount == $this->amount) {
+                $this->updateInventory();
+            } else if ($amount->amount < $this->amount) {
+                $this->addError('stocks', 'You entered more than the available stock.');
+            } else {
+                $this->updateInventory();
+            }
+        } else {
+            $amount = Inventory::where('id', $this->inventory_id)->first();
+            if ($amount->amount == $this->amount) {
+                $this->updateInventory();
+            } else if ($amount->amount < $this->amount) {
+                if ($this->stocks == ($this->amount - $amount->amount)) {
+                    $this->updateInventory();
+                } else if ($this->stocks < ($this->amount - $amount->amount)) {
+                    $this->addError('stocks', 'You entered more than the available stock.');
+                } else {
+                    $this->updateInventory();
+                }
+            } else {
+                $this->updateInventory();
+            }
+        }
+    }
+
+    public function updateInventory()
+    {
         if ($this->date_returned != null) {
             Inventory::where('id', $this->inventory_id)->update([
                 'book_id' => $this->book_name,
@@ -87,6 +117,13 @@ class ShowBorrowers extends Component
             'icon' => 'success',
             'iconColor' => 'green',
         ]);
+    }
+    public function getQuantity($id)
+    {
+        $amount = Book::find($id);
+        $borrowed = Inventory::where('book_id', $id)->sum('amount');
+
+        $this->stocks = $amount->quantity - $borrowed;
     }
 
     // function to confirm if user wants to delete the inventory
@@ -143,7 +180,7 @@ class ShowBorrowers extends Component
     public function resetFieldsAndValidation()
     {
         // call this to reset modal fields
-        $this->reset(['book_name', 'borrower_name', 'date_borrowed', 'date_returned', 'amount']);
+        $this->reset(['book_name', 'borrower_name', 'date_borrowed', 'date_returned', 'amount', 'stocks']);
 
         // call this to reset validation error message
         $this->resetValidation();
