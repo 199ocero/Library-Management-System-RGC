@@ -10,15 +10,22 @@ use Livewire\WithPagination;
 
 class ShowBorrowers extends Component
 {
+    // use WithPagination to use paginate() in render() function
     use WithPagination;
 
+    // use bootstrap as pagination theme
     protected $paginationTheme = 'bootstrap';
 
+    // declare variables
     public $stocks, $books, $borrowers, $book_id, $inventory_id, $borrower_name, $book_name, $date_borrowed, $date_returned, $amount;
 
-    // listener for destroy an resetFieldsAndValidation
+    // listener events in livewire components
     protected $listeners = ['destroy', 'unReturn', 'resetFieldsAndValidation'];
 
+    /*
+        mount data to books and borrowers variable
+        so we can use this variable to show in select dropdown
+    */
     public function mount()
     {
         $this->books = Book::latest()->get();
@@ -37,53 +44,105 @@ class ShowBorrowers extends Component
     // function to edit and show the specific borrower
     public function edit(Inventory $borrower)
     {
+        // call the getQuantity function to get current stocks
         $this->getQuantity($borrower->book_id);
+
         $this->inventory_id = $borrower->id;
         $this->borrower_name = $borrower->borrower_id;
         $this->book_name = $borrower->book_id;
+
+        // convert date borrowed to date format
         $this->date_borrowed = date('Y-m-d', strtotime($borrower->date_borrowed));
+
+        // check if date returned is not null
         if ($borrower->date_returned != null) {
+            // convert date borrowed to date returned
             $this->date_returned = date('Y-m-d', strtotime($borrower->date_returned));
         }
+
         $this->amount = $borrower->amount;
     }
 
     //function to update the inventory
     public function update()
     {
+        //validate data
         $this->validate([
             'book_name' => 'required',
             'borrower_name' => 'required',
             'date_borrowed' => 'required',
             'amount' => 'required|integer|numeric|min:1',
         ]);
-        if ($this->stocks <= 0) {
+
+        //check if stocks is equal to 0
+        if ($this->stocks == 0) {
+            // get the current amount borrowed
             $amount = Inventory::where('id', $this->inventory_id)->first();
+
+            /*
+                if the amount is equal to the inputted amount
+                this means that user did not change the amount field
+            */
             if ($amount->amount == $this->amount) {
+                // just update the inventory
                 $this->updateInventory();
-            } else if ($amount->amount < $this->amount) {
+            }
+            /*
+                check if the amount is lesser than the inputted amount
+                so we can know that the inputted amount is more than
+                the original record in database
+            */ else if ($amount->amount < $this->amount) {
+                // we will show a validation error message
                 $this->addError('stocks', 'You entered more than the available stock.');
             } else {
+                // just update the inventory
                 $this->updateInventory();
             }
         } else {
+            // get the current amount borrowed
             $amount = Inventory::where('id', $this->inventory_id)->first();
+
+            /*
+                if the amount is equal to the inputted amount
+                this means that user did not change the amount field
+            */
             if ($amount->amount == $this->amount) {
+                // just update the inventory
                 $this->updateInventory();
-            } else if ($amount->amount < $this->amount) {
+            }
+            /*
+                check if the amount is lesser than the inputted amount
+                so we can know that the inputted amount is more than
+                the original record in database
+            */ else if ($amount->amount < $this->amount) {
+                /* 
+                    check if stocks is same amount when we subtract
+                    the original amount to the amount inputted by
+                    the user
+                */
                 if ($this->stocks == ($this->amount - $amount->amount)) {
+                    // just update the inventory
                     $this->updateInventory();
-                } else if ($this->stocks < ($this->amount - $amount->amount)) {
+                }
+                /* 
+                    check if stocks is lesser amount than when we subtract
+                    the original amount to the amount inputted by
+                    the user
+                */ else if ($this->stocks < ($this->amount - $amount->amount)) {
+                    // we will show a validation error message
                     $this->addError('stocks', 'You entered more than the available stock.');
                 } else {
+                    // just update the inventory
                     $this->updateInventory();
                 }
             } else {
+                // just update the inventory
                 $this->updateInventory();
             }
         }
     }
 
+    // function for updating the inventory
     public function updateInventory()
     {
         if ($this->date_returned != null) {
@@ -118,11 +177,22 @@ class ShowBorrowers extends Component
             'iconColor' => 'green',
         ]);
     }
+
+    //function to get the available stocks
     public function getQuantity($id)
     {
+        // we get first the book quantity from books table
         $amount = Book::find($id);
+
+        /* 
+            and check first if there is a record in inventory
+            and if there is a record we will get the amount
+            column to get the sum of all amount/quantity borrowed
+            and subtract it to the original quantity
+        */
         $borrowed = Inventory::where('book_id', $id)->sum('amount');
 
+        // subtract the original quantity to total borrowed book
         $this->stocks = $amount->quantity - $borrowed;
     }
 
