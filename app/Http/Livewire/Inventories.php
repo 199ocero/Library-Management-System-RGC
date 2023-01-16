@@ -41,7 +41,7 @@ class Inventories extends Component
         'book_name' => 'required',
         'borrower_name' => 'required',
         'date_borrowed' => 'required',
-        'amount' => 'required|integer',
+        'amount' => 'required|integer|numeric|min:1',
     ];
 
     // function to store inventory
