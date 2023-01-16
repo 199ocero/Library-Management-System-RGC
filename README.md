@@ -16,10 +16,40 @@ What things you need to install the software and how to install them.
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development environment running.
+A step-by-step guide to help you get a development environment running:
 
-- Clone the repository
-- Run composer install
-- Configure your .env file
-- Run migrations
-- Start the server
+1. Clone the repository
+
+```bash
+git clone https://github.com/username/projectname.git
+```
+
+2. Install the dependencies
+
+```bash
+composer install
+```
+
+3. Configure your .env file
+
+- cp .env.example .env
+
+4. Generate an app key
+
+```bash
+php artisan key:generate
+```
+
+5. Run migrations
+
+```bash
+php artisan migrate
+```
+
+6. Start the server
+
+```bash
+php artisan serve
+```
+
+Now you should be able to access the application in your browser at http://localhost:8000.
