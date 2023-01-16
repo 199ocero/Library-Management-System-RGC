@@ -19,8 +19,8 @@ class CreateInventoriesTable extends Migration
             $table->foreignId('borrower_id')->constrained()->onDelete('cascade');;
             $table->integer('amount');
             $table->integer('unreturn_amount');
-            $table->string('date_borrowed');
-            $table->string('date_returned')->nullable();
+            $table->date('date_borrowed');
+            $table->date('date_returned')->nullable();
             $table->timestamps();
         });
     }
