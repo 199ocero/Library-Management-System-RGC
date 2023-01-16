@@ -12,15 +12,22 @@ use Illuminate\Support\Facades\DB;
 class Inventories extends Component
 {
 
+    // use WithPagination to use paginate() in render() function
     use WithPagination;
 
+    // use bootstrap as pagination theme
     protected $paginationTheme = 'bootstrap';
 
+    // declare variables
     public $stocks, $books, $borrowers, $book_name, $borrower_name, $date_borrowed, $amount, $unreturn_amount;
 
-    // listener for destroy an resetFieldsAndValidation
+    // listener events in livewire components
     protected $listeners = ['destroy', 'resetFieldsAndValidation'];
 
+    /*
+        mount data to books and borrowers variable
+        so we can use this variable to show in select dropdown
+    */
     public function mount()
     {
         $this->books = Book::latest()->get();
@@ -36,7 +43,7 @@ class Inventories extends Component
         $this->resetPage();
     }
 
-    // create a rule to validate the input fields
+    // create a rule to validate the fields
     protected $rules = [
         'book_name' => 'required',
         'borrower_name' => 'required',
@@ -47,13 +54,27 @@ class Inventories extends Component
     // function to store inventory
     public function store()
     {
+        // validate data
         $this->validate();
 
-        if ($this->stocks <= 0) {
+        //check if stocks is equal to 0
+        if ($this->stocks == 0) {
+            // we will show a validation error message
             $this->addError('stocks', 'Book out of stock.');
-        } else if ($this->stocks < $this->amount) {
+        }
+        /*
+            check if the stocks is lesser than the inputted amount
+            so we can know that the inputted amount is more than
+            the available stocks
+        */ else if ($this->stocks < $this->amount) {
+            // we will show a validation error message
             $this->addError('stocks', 'You entered more than the available stock.');
-        } else {
+        }
+        /*
+            else if the amount inputted is within the stocks
+            availabillity then we will save the data
+        */ else {
+
             // save inventory if validation is success
             Inventory::create([
                 'book_id' => $this->book_name,
@@ -78,11 +99,21 @@ class Inventories extends Component
         }
     }
 
+    //function to get the available stocks
     public function getQuantity($id)
     {
+        // we get first the book quantity from books table
         $amount = Book::find($id);
+
+        /* 
+            and check first if there is a record in inventory
+            and if there is a record we will get the amount
+            column to get the sum of all amount/quantity borrowed
+            and subtract it to the original quantity
+        */
         $borrowed = Inventory::where('book_id', $id)->sum('amount');
 
+        // subtract the original quantity to total borrowed book
         $this->stocks = $amount->quantity - $borrowed;
     }
 
