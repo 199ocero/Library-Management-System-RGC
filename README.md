@@ -1,6 +1,6 @@
 # LMS - RGC
 
-Easily organize and keep track of your book collection by managing details such as ISBN, book title, quantity, and author.
+A library management system that allows for the efficient organization and management of books, borrowers, and inventory.
 
 ## Getting Started
 
