@@ -1,4 +1,4 @@
-# Project Title
+# LMS - RGC
 
 Easily organize and keep track of your book collection by managing details such as ISBN, book title, quantity, and author.
 
