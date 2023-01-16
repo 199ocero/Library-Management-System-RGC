@@ -21,7 +21,7 @@ A step-by-step guide to help you get a development environment running:
 1. Clone the repository
 
 ```bash
-git clone https://github.com/username/projectname.git
+git clone https://github.com/199ocero/Library-Management-System-RGC.git
 ```
 
 2. Install the dependencies
