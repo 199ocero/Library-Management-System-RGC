@@ -121,7 +121,7 @@ class Books extends Component
     public function destroy($id)
     {
         // find book record where id = id and delete
-        Book::where('id', $id)->delete();
+        Book::find($id)->delete();
         // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Book deleted successfully!',

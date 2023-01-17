@@ -210,7 +210,7 @@ class ShowBorrowers extends Component
 
     public function destroy($id)
     {
-        Inventory::where('id', $id)->delete();
+        Inventory::find($id)->delete();
         // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Inventory deleted successfully!',

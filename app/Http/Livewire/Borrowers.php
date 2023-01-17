@@ -119,7 +119,7 @@ class Borrowers extends Component
     public function destroy($id)
     {
         // find borrower record where id = id and delete
-        Borrower::where('id', $id)->delete();
+        Borrower::find($id)->delete();
         // dispatch event to show sweet alert 2
         $this->dispatchBrowserEvent('swal', [
             'title' => 'Borrower deleted successfully!',
