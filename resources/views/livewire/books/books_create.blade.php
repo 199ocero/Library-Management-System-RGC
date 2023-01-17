@@ -23,10 +23,10 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="bookName" class="form-label">Book Name</label>
-                            <input type="text" class="form-control" id="bookName" wire:model="bookName"
+                            <label for="book_name" class="form-label">Book Name</label>
+                            <input type="text" class="form-control" id="book_name" wire:model="book_name"
                                 placeholder="Enter Book Name">
-                            @error('bookName')
+                            @error('book_name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

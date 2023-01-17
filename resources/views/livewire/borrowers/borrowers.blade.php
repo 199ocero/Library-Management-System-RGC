@@ -1,6 +1,6 @@
 <div>
-    @include('livewire.borrowers.borrowers-create')
-    @include('livewire.borrowers.borrowers-edit')
+    @include('livewire.borrowers.borrowers_create')
+    @include('livewire.borrowers.borrowers_edit')
 
     <div class="d-flex flex-column  justify-content-center vh-100">
 

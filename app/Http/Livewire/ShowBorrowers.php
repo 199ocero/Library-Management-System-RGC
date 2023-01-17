@@ -269,7 +269,7 @@ class ShowBorrowers extends Component
             ->latest()
             ->paginate(5);
 
-        return view('livewire.inventories.show-borrowers', [
+        return view('livewire.inventories.borrowers', [
             'inventories' => $inventories
         ]);
     }
