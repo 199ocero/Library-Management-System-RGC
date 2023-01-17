@@ -89,7 +89,7 @@ class Books extends Component
         ]);
 
         // find book record where id = book_id and update
-        Book::where('id', $this->book_id)->update($validatedData);
+        Book::find($this->book_id)->update($validatedData);
 
         // call this to reset modal fields and validation
         $this->resetFieldsAndValidation();
