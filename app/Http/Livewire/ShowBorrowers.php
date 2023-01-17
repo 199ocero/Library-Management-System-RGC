@@ -146,7 +146,7 @@ class ShowBorrowers extends Component
     public function updateInventory()
     {
         if ($this->date_returned != null) {
-            Inventory::where('id', $this->inventory_id)->update([
+            Inventory::find($this->inventory_id)->update([
                 'book_id' => $this->book_name,
                 'borrower_id' => $this->borrower_name,
                 'date_borrowed' => $this->date_borrowed,
@@ -154,7 +154,7 @@ class ShowBorrowers extends Component
                 'amount' => 0
             ]);
         } else {
-            Inventory::where('id', $this->inventory_id)->update([
+            Inventory::find($this->inventory_id)->update([
                 'book_id' => $this->book_name,
                 'borrower_id' => $this->borrower_name,
                 'date_borrowed' => $this->date_borrowed,

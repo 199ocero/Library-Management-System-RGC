@@ -87,7 +87,7 @@ class Borrowers extends Component
         ]);
 
         // find borrower record where id = book_id and update
-        Borrower::where('id', $this->borrower_id)->update($validatedData);
+        Borrower::find($this->borrower_id)->update($validatedData);
 
         // call this to reset modal fields and validation
         $this->resetFieldsAndValidation();
