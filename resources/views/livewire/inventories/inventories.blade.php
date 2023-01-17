@@ -1,5 +1,5 @@
 <div>
-    @include('livewire.inventories.inventories-create')
+    @include('livewire.inventories.inventories_create')
 
     <div class="d-flex flex-column  justify-content-center vh-100">
 
