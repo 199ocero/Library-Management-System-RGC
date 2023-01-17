@@ -30,7 +30,7 @@
                         <div class="mb-3">
                             <div wire:ignore>
                                 <label for="book_name" class="form-label">Select Book Name</label>
-                                <select wire:model='book_name' wire:change='getQuantity($event.target.value)'
+                                <select wire:model='book_name' wire:change='getStocksQuantity($event.target.value)'
                                     class="form-control selectpickerBook" data-live-search="true" data-size="5"
                                     title="Select book...">
                                     @foreach ($books as $book)

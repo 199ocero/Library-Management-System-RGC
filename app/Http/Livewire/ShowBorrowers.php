@@ -44,8 +44,8 @@ class ShowBorrowers extends Component
     // function to edit and show the specific borrower
     public function edit(Inventory $borrower)
     {
-        // call the getQuantity function to get current stocks
-        $this->getQuantity($borrower->book_id);
+        // call the getStocksQuantity function to get current stocks
+        $this->getStocksQuantity($borrower->book_id);
 
         $this->inventory_id = $borrower->id;
         $this->borrower_name = $borrower->borrower_id;
@@ -179,7 +179,7 @@ class ShowBorrowers extends Component
     }
 
     //function to get the available stocks
-    public function getQuantity($id)
+    public function getStocksQuantity($id)
     {
         // we get first the book quantity from books table
         $amount = Book::find($id);

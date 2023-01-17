@@ -100,7 +100,7 @@ class Inventories extends Component
     }
 
     //function to get the available stocks
-    public function getQuantity($id)
+    public function getStocksQuantity($id)
     {
         // we get first the book quantity from books table
         $amount = Book::find($id);
