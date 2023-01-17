@@ -16,7 +16,7 @@ class Books extends Component
     protected $paginationTheme = 'bootstrap';
 
     // declare variable
-    public $book_id, $isbn, $book_name, $author, $quantity;
+    public $bookID, $isbn, $bookName, $author, $quantity;
 
     // declare variable for search filter
     public $search = '';
@@ -33,7 +33,7 @@ class Books extends Component
     // create a rule to validate the fields
     protected $rules = [
         'isbn' => 'required|string|size:10|digits:10|unique:books',
-        'book_name' => 'required|string',
+        'bookName' => 'required|string',
         'author' => 'required|string',
         'quantity' => 'required|integer|min:1',
     ];
@@ -47,7 +47,7 @@ class Books extends Component
         // save book if validation is success
         Book::create([
             'isbn' => $this->isbn,
-            'book_name' => $this->book_name,
+            'book_name' => $this->bookName,
             'author' => $this->author,
             'quantity' => $this->quantity,
         ]);
@@ -69,9 +69,9 @@ class Books extends Component
     // function to edit and show the specific book
     public function edit(Book $book)
     {
-        $this->book_id = $book->id;
+        $this->bookID = $book->id;
         $this->isbn = $book->isbn;
-        $this->book_name = $book->book_name;
+        $this->bookName = $book->book_name;
         $this->author = $book->author;
         $this->quantity = $book->quantity;
     }
@@ -88,8 +88,8 @@ class Books extends Component
             'quantity' => 'required|integer',
         ]);
 
-        // find book record where id = book_id and update
-        Book::where('id', $this->book_id)->update($validatedData);
+        // find book record where id = bookID and update
+        Book::where('id', $this->bookID)->update($validatedData);
 
         // call this to reset modal fields and validation
         $this->resetFieldsAndValidation();
@@ -135,7 +135,7 @@ class Books extends Component
     public function resetFieldsAndValidation()
     {
         // call this to reset modal fields
-        $this->reset(['isbn', 'book_name', 'author', 'quantity']);
+        $this->reset(['isbn', 'bookName', 'author', 'quantity']);
 
         // call this to reset validation error message
         $this->resetValidation();

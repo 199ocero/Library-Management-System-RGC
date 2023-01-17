@@ -1,16 +1,16 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="createBookModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div wire:ignore.self class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create New Book Record</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit and Update Book Record</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                         wire:click='resetFieldsAndValidation'>
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form wire:submit.prevent="store">
+                <form wire:submit.prevent="update">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="isbn" class="form-label">International Standard Book Number (ISBN)</label>
@@ -23,10 +23,10 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="book_name" class="form-label">Book Name</label>
-                            <input type="text" class="form-control" id="book_name" wire:model="book_name"
+                            <label for="bookName" class="form-label">Book Name</label>
+                            <input type="text" class="form-control" id="bookName" wire:model="bookName"
                                 placeholder="Enter Book Name">
-                            @error('book_name')
+                            @error('bookName')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -50,7 +50,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" wire:click='resetFieldsAndValidation'
                             data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Update changes</button>
                     </div>
                 </form>
             </div>
